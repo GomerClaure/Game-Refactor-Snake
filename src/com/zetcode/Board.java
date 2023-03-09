@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -37,7 +39,7 @@ public class Board extends JPanel implements ActionListener {
     public LogicaDelJuego logicaTablero;
 
     public Board() {
-        logicaTablero = new LogicaDelJuego(); 
+        logicaTablero = new LogicaDelJuego(3); 
         initBoard();
     }
     
@@ -63,11 +65,6 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void initGame() {
-        dots = 3;
-        for (int z = 0; z < dots; z++) {
-            logicaTablero.x[z] = 50 - z * 10;
-            logicaTablero.y[z] = 50;
-        }
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -80,17 +77,13 @@ public class Board extends JPanel implements ActionListener {
     }
     
     private void doDrawing(Graphics g) {
+        HashMap<String,int[]> bodySnake = logicaTablero.getBodySnakePos();
         if (logicaTablero.inGame) {
-            System.out.println("Apple x: "+logicaTablero.apple_x+" Apple y: "+logicaTablero.apple_y);
-            g.drawImage(apple, logicaTablero.apple_x, logicaTablero.apple_y, this);
-
+            g.drawImage(apple, logicaTablero.getApplePosX(), logicaTablero.getApplePosY(), this);
             for (int z = 0; z < dots; z++) {
-                if (z == 0) {
-                    System.out.println("Snke size: "+ dots);
-                    System.out.println("Gusano punto x:"+logicaTablero.x[z]+"Gusano punto y: "+logicaTablero.y[z]);
-                    g.drawImage(head, logicaTablero.x[z], logicaTablero.y[z], this);
+                if (z == 0) {g.drawImage(head, bodySnake.get("x")[z], bodySnake.get("y")[z], this);
                 } else {
-                    g.drawImage(ball, logicaTablero.x[z], logicaTablero.y[z], this);
+                    g.drawImage(ball, bodySnake.get("x")[z], bodySnake.get("y")[z], this);
                 }
             }
 
@@ -116,9 +109,6 @@ public class Board extends JPanel implements ActionListener {
         if (inGame) {
             inGame = logicaTablero.realizarMovimiento(leftDirection, rightDirection, upDirection, downDirection);
             dots = logicaTablero.dots;
-            // checkApple();
-            // checkCollision();
-            // move();
         }else{
             timer.stop();
         }

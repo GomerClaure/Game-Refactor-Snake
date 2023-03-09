@@ -1,6 +1,6 @@
 package com.zetcode;
 
-import javax.swing.Timer;
+import java.util.HashMap;
 
 public class LogicaDelJuego {
     private final int B_WIDTH;
@@ -17,8 +17,8 @@ public class LogicaDelJuego {
     public int apple_y;
     public boolean inGame = true;
 
-    private Timer timer;
-    public LogicaDelJuego(){
+    public LogicaDelJuego(int dots){
+        this.dots = dots;
         B_WIDTH = 300;
         B_HEIGHT = 300;
         initGame();
@@ -30,8 +30,6 @@ public class LogicaDelJuego {
         return inGame;
     }
     private void initGame() {
-        dots = 3;
-
         for (int z = 0; z < dots; z++) {
             x[z] = 50 - z * 10;
             y[z] = 50;
@@ -107,4 +105,20 @@ public class LogicaDelJuego {
         r = (int) (Math.random() * RAND_POS);
         apple_y = ((r * DOT_SIZE));
     }
+
+    public HashMap<String,int[]> getBodySnakePos(){
+        HashMap<String,int[]> nuevo = new HashMap<String,int[]>();
+        nuevo.put("x", x);
+        nuevo.put("y", y);
+        return nuevo;
+    }
+    public int getApplePosX(){
+        return apple_x;
+    }
+    public int getApplePosY(){
+        return apple_y;
+    }
+    // public int[] getApplePos(){
+    //     return new int[]{apple_x, apple_y};
+    // }
 }
