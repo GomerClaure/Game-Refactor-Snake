@@ -9,13 +9,13 @@ public class LogicaDelJuego {
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
 
-    public final int x[] = new int[ALL_DOTS];
-    public final int y[] = new int[ALL_DOTS];
+    private final int x[] = new int[ALL_DOTS];
+    private final int y[] = new int[ALL_DOTS];
 
-    public int dots;
-    public int apple_x;
-    public int apple_y;
-    public boolean inGame = true;
+    private int dots;
+    private int apple_x;
+    private int apple_y;
+    private boolean inGame = true;
 
     public LogicaDelJuego(int dots){
         this.dots = dots;
@@ -117,6 +117,12 @@ public class LogicaDelJuego {
     }
     public int getApplePosY(){
         return apple_y;
+    }
+    public boolean isInGame(){
+        return inGame;
+    }
+    public int getSnakeSize(){
+        return dots;
     }
     // public int[] getApplePos(){
     //     return new int[]{apple_x, apple_y};

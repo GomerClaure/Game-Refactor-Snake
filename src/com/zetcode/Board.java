@@ -24,8 +24,6 @@ public class Board extends JPanel implements ActionListener {
     // private final int RAND_POS = 29;
     private final int DELAY = 140;
 
-    private int dots;
-
     private boolean leftDirection = false;
     private boolean rightDirection = true;
     private boolean upDirection = false;
@@ -78,10 +76,14 @@ public class Board extends JPanel implements ActionListener {
     
     private void doDrawing(Graphics g) {
         HashMap<String,int[]> bodySnake = logicaTablero.getBodySnakePos();
-        if (logicaTablero.inGame) {
+        if (logicaTablero.isInGame()) {
             g.drawImage(apple, logicaTablero.getApplePosX(), logicaTablero.getApplePosY(), this);
-            for (int z = 0; z < dots; z++) {
-                if (z == 0) {g.drawImage(head, bodySnake.get("x")[z], bodySnake.get("y")[z], this);
+            // System.out.println("Numero de puntos= "+logicaTablero.dots+" Numero de body Snake = "+bodySnake.get("x").length);
+            for (int z = 0; z < logicaTablero.getSnakeSize(); z++) {
+                
+                if (z == 0) {
+                    System.out.println("X: "+bodySnake.get("x")[z]+" Y: "+bodySnake.get("y")[z]);
+                    g.drawImage(head, bodySnake.get("x")[z], bodySnake.get("y")[z], this);
                 } else {
                     g.drawImage(ball, bodySnake.get("x")[z], bodySnake.get("y")[z], this);
                 }
@@ -108,7 +110,6 @@ public class Board extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (inGame) {
             inGame = logicaTablero.realizarMovimiento(leftDirection, rightDirection, upDirection, downDirection);
-            dots = logicaTablero.dots;
         }else{
             timer.stop();
         }
