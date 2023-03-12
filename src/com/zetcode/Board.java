@@ -77,15 +77,14 @@ public class Board extends JPanel implements ActionListener {
     private void doDrawing(Graphics g) {
         HashMap<String,int[]> bodySnake = logicaTablero.getBodySnakePos();
         if (logicaTablero.isInGame()) {
-            g.drawImage(apple, logicaTablero.getApplePosX(), logicaTablero.getApplePosY(), this);
-            // System.out.println("Numero de puntos= "+logicaTablero.dots+" Numero de body Snake = "+bodySnake.get("x").length);
+            g.drawImage(apple, logicaTablero.getApplePosX()*10, logicaTablero.getApplePosY()*10, this);
             for (int z = 0; z < logicaTablero.getSnakeSize(); z++) {
                 
                 if (z == 0) {
                     System.out.println("X: "+bodySnake.get("x")[z]+" Y: "+bodySnake.get("y")[z]);
-                    g.drawImage(head, bodySnake.get("x")[z], bodySnake.get("y")[z], this);
+                    g.drawImage(head, bodySnake.get("x")[z]*10, bodySnake.get("y")[z]*10, this);
                 } else {
-                    g.drawImage(ball, bodySnake.get("x")[z], bodySnake.get("y")[z], this);
+                    g.drawImage(ball, bodySnake.get("x")[z]*10, bodySnake.get("y")[z]*10, this);
                 }
             }
 

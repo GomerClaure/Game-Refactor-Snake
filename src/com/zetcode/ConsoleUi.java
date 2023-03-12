@@ -76,8 +76,8 @@ public class ConsoleUi {
         HashMap<String,int[]> bodySnake = logicaTablero.getBodySnakePos();
         if (logicaTablero.isInGame()) {
             //Colocar manzana
-            int manzanaX = logicaTablero.getApplePosX()/10+1;
-            int manzanaY = logicaTablero.getApplePosY()/10+1;
+            int manzanaX = logicaTablero.getApplePosX()+1;
+            int manzanaY = logicaTablero.getApplePosY()+1;
             StringBuffer filaManzana = new StringBuffer(tablero[manzanaY]);
             filaManzana.delete(1, 2);//Borro un espacio de la fila para insertar el caracter de la manzana
             filaManzana.insert(manzanaX, "M");
@@ -90,15 +90,15 @@ public class ConsoleUi {
                 
                 if (z == 0) {
                     // System.out.println("X: "+bodySnake.get("x")[z]+" Y: "+bodySnake.get("y")[z]);
-                    StringBuffer filaCabeza = new StringBuffer(tablero[posCuerpoY[z]/10+1]);
+                    StringBuffer filaCabeza = new StringBuffer(tablero[posCuerpoY[z]+1]);
                     filaCabeza.delete(1, 2);//Borro un espacio de la fila para insertar el caracter de la manzana
-                    filaCabeza.insert(posCuerpoX[z]/10+1, "0");
-                    tablero[posCuerpoY[z]/10+1] = filaCabeza.toString();
+                    filaCabeza.insert(posCuerpoX[z]+1, "0");
+                    tablero[posCuerpoY[z]+1] = filaCabeza.toString();
                 } else {
-                    StringBuffer filaCuerpo = new StringBuffer(tablero[posCuerpoY[z]/10+1]);
+                    StringBuffer filaCuerpo = new StringBuffer(tablero[posCuerpoY[z]+1]);
                     filaCuerpo.delete(1, 2);//Borro un espacio de la fila para insertar el caracter de la manzana
-                    filaCuerpo.insert(posCuerpoX[z]/10+1, "o");
-                    tablero[posCuerpoY[z]/10+1] = filaCuerpo.toString();
+                    filaCuerpo.insert(posCuerpoX[z]+1, "o");
+                    tablero[posCuerpoY[z]+1] = filaCuerpo.toString();
                 }
             }
              
